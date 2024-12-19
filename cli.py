@@ -12,9 +12,10 @@ def main_menu():
         print("3. Add a Borrower")
         print("4. Borrow a Book")
         print("5. Return a Book")
-        print("6. Exit")
+        print("6. Delete a Borrower")
         print("7. Delete a Book")
-        print("8. Exit")
+        print("8. Delete a Loan")
+        print("9. Exit")
 
         choice = input("Choose an option: ")
 
@@ -29,10 +30,18 @@ def main_menu():
         elif choice == "5":
             return_book()
         elif choice == "6":
+            delete_borrower()
+        elif choice == "7":
+            delete_book()
+        elif choice == "8":
+            delete_loan()
+        elif choice == "9":
             print("Goodbye!")
             break
         else:
             print("Invalid choice. Try again.")
+
+
 def add_book():
     title = input("Enter book title: ")
     author = input("Enter book author: ")
@@ -84,6 +93,17 @@ def borrow_book():
         print(f"Book '{book.title}' borrowed successfully!")
     else:
         print("No copies available.")
+def delete_loan():
+    loan_id = int(input("Enter the ID of the loan to delete: "))
+    loan = session.query(Loan).get(loan_id)
+
+    if loan:
+        session.delete(loan)
+        session.commit()
+        print(f"Loan with ID {loan_id} has been deleted successfully.")
+    else:
+        print("Loan not found.")
+
 def return_book():
     loan_id = int(input("Enter loan ID to return: "))
     loan = session.query(Loan).get(loan_id)
