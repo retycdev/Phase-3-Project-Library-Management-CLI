@@ -31,3 +31,12 @@ def main_menu():
             break
         else:
             print("Invalid choice. Try again.")
+def add_book():
+    title = input("Enter book title: ")
+    author = input("Enter book author: ")
+    copies = int(input("Enter number of copies: "))
+
+    book = Book(title=title, author=author, copies_available=copies)
+    session.add(book)
+    session.commit()
+    print(f"Book '{title}' added successfully!")
