@@ -52,3 +52,17 @@ def add_borrower():
     session.add(borrower)
     session.commit()
     print(f"Borrower '{name}' added successfully!")
+def borrow_book():
+    view_books()
+    book_id = int(input("Enter book ID to borrow: "))
+    borrower_id = int(input("Enter borrower ID: "))
+
+    book = session.query(Book).get(book_id)
+    if book.copies_available > 0:
+        loan = Loan(book_id=book_id, borrower_id=borrower_id, loan_date=date.today())
+        book.copies_available -= 1
+        session.add(loan)
+        session.commit()
+        print(f"Book '{book.title}' borrowed successfully!")
+    else:
+        print("No copies available.")
