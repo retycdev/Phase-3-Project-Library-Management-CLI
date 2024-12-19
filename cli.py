@@ -66,3 +66,15 @@ def borrow_book():
         print(f"Book '{book.title}' borrowed successfully!")
     else:
         print("No copies available.")
+def return_book():
+    loan_id = int(input("Enter loan ID to return: "))
+    loan = session.query(Loan).get(loan_id)
+
+    if loan:
+        book = session.query(Book).get(loan.book_id)
+        book.copies_available += 1
+        session.delete(loan)
+        session.commit()
+        print(f"Book '{book.title}' returned successfully!")
+    else:
+        print("Loan record not found.")
