@@ -10,12 +10,13 @@ def main_menu():
         print("1. Add a Book")
         print("2. View Books")
         print("3. Add a Borrower")
-        print("4. Borrow a Book")
-        print("5. Return a Book")
-        print("6. Delete a Borrower")
-        print("7. Delete a Book")
-        print("8. Delete a Loan")
-        print("9. Exit")
+        print("4. View Borrowers")
+        print("5. Borrow a Book")
+        print("6. Return a Book")
+        print("7. Delete a Borrower")
+        print("8. Delete a Book")
+        print("9. Delete a Loan")
+        print("10. Exit")
 
         choice = input("Choose an option: ")
 
@@ -26,20 +27,23 @@ def main_menu():
         elif choice == "3":
             add_borrower()
         elif choice == "4":
-            borrow_book()
+            view_borrowers()
         elif choice == "5":
-            return_book()
+            borrow_book()
         elif choice == "6":
-            delete_borrower()
+            return_book()
         elif choice == "7":
-            delete_book()
+            delete_borrower()
         elif choice == "8":
-            delete_loan()
+            delete_book()
         elif choice == "9":
+            delete_loan()
+        elif choice == "10":
             print("Goodbye!")
             break
         else:
             print("Invalid choice. Try again.")
+
 
 
 def add_book():
