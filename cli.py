@@ -44,3 +44,11 @@ def view_books():
     books = session.query(Book).all()
     for book in books:
         print(f"{book.id}: {book.title} by {book.author} ({book.copies_available} copies available)")
+def add_borrower():
+    name = input("Enter borrower's name: ")
+    email = input("Enter borrower's email: ")
+
+    borrower = Borrower(name=name, email=email)
+    session.add(borrower)
+    session.commit()
+    print(f"Borrower '{name}' added successfully!")
