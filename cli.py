@@ -135,3 +135,19 @@ def delete_book():
             print(f"Book '{book.title}' by {book.author} has been deleted successfully.")
     else:
         print("Book not found.")
+
+def view_borrowers():
+    borrowers = session.query(Borrower).all()
+
+    if borrowers:
+        print("\nList of Borrowers:")
+        for borrower in borrowers:
+            print(f"ID: {borrower.id}, Name: {borrower.name}, Email: {borrower.email}")
+            if borrower.loans:
+                print("  Active Loans:")
+                for loan in borrower.loans:
+                    print(f"    Loan ID: {loan.id}, Book Title: {loan.book.title}, Borrowed On: {loan.date_borrowed}")
+            else:
+                print("  No active loans.")
+    else:
+        print("No borrowers found.")
