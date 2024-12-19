@@ -40,3 +40,7 @@ def add_book():
     session.add(book)
     session.commit()
     print(f"Book '{title}' added successfully!")
+def view_books():
+    books = session.query(Book).all()
+    for book in books:
+        print(f"{book.id}: {book.title} by {book.author} ({book.copies_available} copies available)")
