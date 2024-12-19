@@ -96,3 +96,18 @@ def return_book():
         print(f"Book '{book.title}' returned successfully!")
     else:
         print("Loan record not found.")
+
+def delete_book():
+    book_id = int(input("Enter the ID of the book to delete: "))
+    book = session.query(Book).get(book_id)
+
+    if book:
+        # Check if the book has active loans
+        if book.loans:
+            print("Book has active loans. Please delete the loans first.")
+        else:
+            session.delete(book)
+            session.commit()
+            print(f"Book '{book.title}' by {book.author} has been deleted successfully.")
+    else:
+        print("Book not found.")
