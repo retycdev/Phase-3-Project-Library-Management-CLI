@@ -13,6 +13,8 @@ def main_menu():
         print("4. Borrow a Book")
         print("5. Return a Book")
         print("6. Exit")
+        print("7. Delete a Book")
+        print("8. Exit")
 
         choice = input("Choose an option: ")
 
@@ -52,6 +54,22 @@ def add_borrower():
     session.add(borrower)
     session.commit()
     print(f"Borrower '{name}' added successfully!")
+
+def delete_borrower():
+    borrower_id = int(input("Enter the ID of the borrower to delete: "))
+    borrower = session.query(Borrower).get(borrower_id)
+
+    if borrower:
+        # Check if the borrower has active loans
+        if borrower.loans:
+            print("Borrower has active loans. Please delete the loans first.")
+        else:
+            session.delete(borrower)
+            session.commit()
+            print(f"Borrower '{borrower.name}' has been deleted successfully.")
+    else:
+        print("Borrower not found.")
+
 def borrow_book():
     view_books()
     book_id = int(input("Enter book ID to borrow: "))
